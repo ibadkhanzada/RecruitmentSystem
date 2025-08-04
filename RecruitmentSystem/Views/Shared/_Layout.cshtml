@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Recruitment System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/assets/css/style.css" asp-append-version="true" />
+
+
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav>
+        <div class="logo">ABC Recruitment</div>
+
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <ul id="navbarMenu">
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Vacancies</a></li>
+            <li><a href="#">Apply</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a asp-controller="Accounts" asp-action="Register">Login</a></li>
+        </ul>
+    </nav>
+
+
+    <!-- Body Content -->
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
+
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <div class="footer-logo">CompanyName</div>
+                <p>We create innovative solutions that make life easier and businesses better.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h5>Quick Links</h5>
+                <ul class="footer-links">
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h5>Support</h5>
+                <ul class="footer-links">
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h5>Newsletter</h5>
+                <p>Stay in touch. Subscribe to receive updates and news.</p>
+                <div class="footer-newsletter">
+                    <input type="email" placeholder="Enter your email" />
+                    <button class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+          
+            <p>© 2025 CompanyName. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+          document.getElementById("navbarMenu").classList.toggle("show");
+        }
+    </script>
+</body>
+</html>
+
