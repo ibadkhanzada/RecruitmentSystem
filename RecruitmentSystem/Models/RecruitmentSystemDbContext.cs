@@ -44,7 +44,7 @@ public partial class RecruitmentSystemDbContext : DbContext
             entity.Property(e => e.DepartmentName).HasMaxLength(100);
         });
 
-
+        
 
         modelBuilder.Entity<User>(entity =>
         {
