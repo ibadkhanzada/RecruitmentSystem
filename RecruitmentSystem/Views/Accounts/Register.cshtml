@@ -5,8 +5,6 @@
     Layout = "~/Views/Shared/RegistrationLayout.cshtml";
 }
 
-
-
 <div class="wrapper">
     <div class="inner">
         <div class="image-holder" style="position: relative;">
@@ -17,60 +15,66 @@
                 <a asp-controller="Home" asp-action="Index" class="btn-home">Back to Home</a>
             </div>
         </div>
+
         <form asp-action="Register" asp-controller="Accounts" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="All" class="text-danger"></div>
             <h3>Submit Application</h3>
+
             <div class="form-group">
-                <input type="text" placeholder="Full Name" asp-for="FullName" class="form-control">
+                <input type="text" placeholder="Full Name" asp-for="FullName" class="form-control" />
                 <span asp-validation-for="FullName" class="text-danger"></span>
-                <input type="text" placeholder="Email" asp-for="Email" class="form-control">
-                <span asp-validation-for="FullName" class="text-danger"></span>
+
+                <input type="text" placeholder="Email" asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="number" placeholder="Phone" asp-for="Phone" class="form-control">
-                <span asp-validation-for="FullName" class="text-danger"></span>
-                <i class="mdi mdi-account"></i>
-                <input type="text" placeholder="City" asp-for="City" class="form-control">
-                <span asp-validation-for="FullName" class="text-danger"></span>
-                <i class="mdi mdi-email"></i>
+                <input type="text" placeholder="Phone" asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+
+                <input type="text" placeholder="City" asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <input type="text" placeholder="Region" asp-for="Region" class="form-control">
-                <span asp-validation-for="FullName" class="text-danger"></span>
-                <i class="mdi mdi-lock"></i>
-                <input type="number" placeholder="Year of Experience" asp-for="YearsOfExperience" class="form-control">
-                <span asp-validation-for="FullName" class="text-danger"></span>
-                <i class="mdi mdi-lock"></i>
+                <input type="text" placeholder="Region" asp-for="Region" class="form-control" />
+                <span asp-validation-for="Region" class="text-danger"></span>
+
+                <input type="number" placeholder="Years of Experience" asp-for="YearsOfExperience" class="form-control" />
+                <span asp-validation-for="YearsOfExperience" class="text-danger"></span>
             </div>
+
             <div class="form-wrapper">
-                <input type="text" placeholder="Area of Expertise" asp-for="AreaOfExpertise" class="form-control">
-                <span asp-validation-for="FullName" class="text-danger"></span>
-                <i class="mdi mdi-lock"></i>
+                <input type="text" placeholder="Area of Expertise" asp-for="AreaOfExpertise" class="form-control" />
+                <span asp-validation-for="AreaOfExpertise" class="text-danger"></span>
             </div>
+
             <div class="form-wrapper">
-                <input placeholder="LinkedIn Profile" asp-for="LinkedInProfile" class="form-control">
-                <span asp-validation-for="FullName" class="text-danger"></span>
-                <i class="mdi mdi-lock"></i>
+                <input type="text" placeholder="LinkedIn Profile" asp-for="LinkedInProfile" class="form-control" />
+                <span asp-validation-for="LinkedInProfile" class="text-danger"></span>
             </div>
+
             <div class="form-wrapper">
-                <input type="file" name="CvFilePath" class="form-control">
-                <i class="mdi mdi-lock"></i>
+                <label>Upload CV</label>
+                <input type="file" name="CvFile" class="form-control" />
             </div>
+
             <div class="form-wrapper">
                 <textarea asp-for="AdditionalComments" placeholder="Additional Information" class="form-control"></textarea>
-                <i class="mdi mdi-lock"></i>
             </div>
+
             <button type="submit">
                 Submit
                 <i class="mdi mdi-arrow-right"></i>
             </button>
 
-            @section Scripts {
-                <partial name="_ValidationScriptsPartial" />
-            }
             @if (TempData["Message"] != null)
             {
-                <div style="color:green;">@TempData["Message"]</div>
+                <div style="color: green; margin-top: 10px;">@TempData["Message"]</div>
+            }
+
+            @section Scripts {
+                <partial name="_ValidationScriptsPartial" />
             }
         </form>
     </div>
