@@ -11,5 +11,5 @@ public partial class Department
 
     public virtual ICollection<User> Users { get; set; } = new List<User>();
 
-    public virtual ICollection<Vacancy> Vacancies { get; set; } = new List<Vacancy>();
+
 }

@@ -26,7 +26,7 @@ public partial class User
 
     public virtual Department? Department { get; set; }
 
-    public virtual ICollection<Interview> Interviews { get; set; } = new List<Interview>();
 
-    public virtual ICollection<Vacancy> Vacancies { get; set; } = new List<Vacancy>();
+
+  
 }
