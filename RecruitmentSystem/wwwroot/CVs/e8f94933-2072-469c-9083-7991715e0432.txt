@@ -1,0 +1,53 @@
+-- Register Table
+CREATE TABLE Register (
+    userId INT IDENTITY(1,1) PRIMARY KEY,
+    name NVARCHAR(100) NOT NULL,
+    email NVARCHAR(100) UNIQUE NOT NULL,
+    password NVARCHAR(100) NOT NULL,
+    role NVARCHAR(50) NOT NULL
+);
+
+-- Category Table
+CREATE TABLE Category (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    cateName NVARCHAR(100) NOT NULL
+);
+
+-- Product Table
+CREATE TABLE Product (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    productName NVARCHAR(100) NOT NULL,
+    price int NOT NULL,
+    description NVARCHAR(500),
+    quantity INT NOT NULL,
+    image NVARCHAR(225),  -- You can store image URL or base64 string
+    categoryId INT,
+    FOREIGN KEY (categoryId) REFERENCES Category(id)
+);
+
+-- Cart Table
+CREATE TABLE Cart (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    productId INT NOT NULL,
+    userId INT NOT NULL,
+    tprice int NOT NULL,
+    quantity INT NOT NULL,
+    FOREIGN KEY (productId) REFERENCES Product(id),
+    FOREIGN KEY (userId) REFERENCES Register(userId)
+);
+
+-- Order Table
+CREATE TABLE [Order] (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    userId INT NOT NULL,
+    productId INT NOT NULL,
+    shippingAddress NVARCHAR(200) NOT NULL,
+    paymentMethod NVARCHAR(50) NOT NULL,
+    tprice int NOT NULL,
+    FOREIGN KEY (userId) REFERENCES Register(userId),
+    FOREIGN KEY (productId) REFERENCES Product(id)
+);
+
+DESKTOP-IG4DQ1I\Ibad Khan
+
+ Scaffold-DbContext "data source=.;initial catalog=ecommerce;user id=DESKTOP-IG4DQ1I\Ibad Khan;password=aptech; TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models
