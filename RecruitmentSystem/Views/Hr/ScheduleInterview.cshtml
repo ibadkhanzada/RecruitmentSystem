@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "ScheduleInterview";
+    Layout = "~/Views/Shared/_hrLayout.cshtml";
+}
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+
+        <div class="col-12 ml-3">
+            <div class="bg-light rounded h-100 p-4">
+                <h6 class="mb-4">Vacancies List</h6>
+
+<form  method="post">
+    <div class="form-group">
+        <label>Applicant</label>
+        <select   class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label>Vacancy</label>
+        <select   class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label>Interviewer</label>
+        <select  class="form-control"></select>
+    </div>
+
+    <div class="form-group">
+        <label>Date</label>
+        <input class="form-control" min="@DateTime.Now.ToString("yyyy-MM-dd")" />
+    </div>
+
+    <div class="form-group">
+        <label>Time</label>
+        <input  type="time" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Schedule Interview</button>
+</form>
+
+            </div>
+        </div>
+    </div>
+</div>
