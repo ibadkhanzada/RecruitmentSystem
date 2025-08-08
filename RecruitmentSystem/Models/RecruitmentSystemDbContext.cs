@@ -44,8 +44,6 @@ public partial class RecruitmentSystemDbContext : DbContext
             entity.Property(e => e.DepartmentName).HasMaxLength(100);
         });
 
-        
-
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__Users__3214EC0794F0B1E2");
@@ -62,8 +60,6 @@ public partial class RecruitmentSystemDbContext : DbContext
                 .HasForeignKey(d => d.DepartmentId)
                 .HasConstraintName("FK__Users__Departmen__276EDEB3");
         });
-
-
 
         OnModelCreatingPartial(modelBuilder);
     }

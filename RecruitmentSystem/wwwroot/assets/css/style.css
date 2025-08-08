@@ -9,17 +9,18 @@ body, html {
     font-family: 'Poppins', sans-serif;
 }
 
-/* Navbar */
+/* Navbar Base */
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: #2c3e50;
     padding: 15px 30px;
-    position: sticky;
+    position: fixed;
     top: 0;
-    z-index: 1000;
-    flex-wrap: wrap;
+    left: 0;
+    width: 100%;
+    z-index: 999;
 }
 
     nav .logo {
@@ -27,30 +28,43 @@ nav {
         font-size: 26px;
         font-weight: bold;
     }
-        nav .logo a{
-            text-decoration: none;
-            color:aliceblue
-        }
 
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 5px;
-            cursor: pointer;
-        }
+/* Toggle Button */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    z-index: 1100;
+}
 
     .menu-toggle span {
         width: 25px;
         height: 3px;
         background-color: white;
         border-radius: 2px;
+        transition: all 0.3s ease;
     }
 
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
+
+/* Navbar Links */
 nav ul {
     list-style: none;
     display: flex;
     gap: 25px;
     align-items: center;
+    transition: right 0.3s ease;
 }
 
     nav ul li a {
@@ -64,147 +78,208 @@ nav ul {
             color: #7f8c8d;
         }
 
+    /* Outline Login Button */
     nav ul li:last-child a {
-        background: linear-gradient(to right, #4b6cb7, #182848);
+        border: 2px solid white;
         padding: 8px 18px;
         border-radius: 20px;
         font-weight: bold;
-        transition: background 0.3s;
+        background: transparent;
+        transition: all 0.3s ease;
     }
 
         nav ul li:last-child a:hover {
-            background: linear-gradient(to right, #3a539b, #1c2833);
+            background: white;
+            color: #2c3e50;
         }
 
-/* Slider */
+/* Responsive Navbar */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    nav ul {
+        position: absolute;
+        top: 65px;
+        right: -220px; /* hide by default */
+        flex-direction: column;
+        background-color: #2c3e50;
+        width: 200px;
+        padding: 20px;
+    }
+
+        nav ul.active {
+            right: 0;
+        }
+}
+
 .slider-container {
     position: relative;
     width: 100%;
-    height: 85vh;
+    height: 80vh;
     overflow: hidden;
 }
 
     .slider-container img {
-        position: absolute;
         width: 100%;
         height: 100%;
         object-fit: cover;
-        opacity: 0;
-        animation: fade 15s infinite;
     }
 
-        .slider-container img:nth-child(1) {
-            animation-delay: 0s;
-        }
-
-        .slider-container img:nth-child(2) {
-            animation-delay: 5s;
-        }
-
-        .slider-container img:nth-child(3) {
-            animation-delay: 10s;
-        }
-
-@keyframes fade {
-    0% {
-        opacity: 0;
+    .slider-container::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7) );
+        z-index: 1;
     }
-
-    5% {
-        opacity: 1;
-    }
-
-    30% {
-        opacity: 1;
-    }
-
-    35% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
 
 .overlay-text {
     position: absolute;
-    top: 55%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    color: #fff;
     text-align: center;
-    color: white;
-    z-index: 10;
-    background-color: rgba(0, 0, 0, 0.55);
-    padding: 40px;
-    border-radius: 20px;
-    backdrop-filter: blur(5px);
-    width: 90%;
-    max-width: 750px;
-    box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    z-index: 2;
+    max-width: 80%;
 }
 
     .overlay-text h1 {
         font-size: 3rem;
-        margin-bottom: 20px;
-        font-weight: 700;
-        text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
-        letter-spacing: 1px;
+        font-weight: bold;
+        margin-bottom: 15px;
+        text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5);
     }
 
     .overlay-text p {
         font-size: 1.2rem;
-        margin-bottom: 25px;
         line-height: 1.6;
-        color: #ddd;
+        text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
     }
 
-    .overlay-text a {
-        padding: 12px 35px;
-        background: linear-gradient(to right, #4b6cb7, #182848);
-        color: white;
-        text-decoration: none;
-        border-radius: 30px;
+/* Base style for both buttons */
+.hero-btn {
+    display: inline-block;
+    padding: 12px 32px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    letter-spacing: 0.5px;
+    margin-top: 20px;
+}
+
+/* Primary button (Get Started) */
+.hero-btn-primary {
+    background: linear-gradient(135deg, #0d47a1, #1976d2);
+    color: #fff !important;
+    box-shadow: 0px 4px 12px rgba(255, 90, 95, 0.3);
+    border: none;
+}
+
+    .hero-btn-primary:hover {
+        background: linear-gradient(135deg, #08306b, #1565c0);
+        box-shadow: 0px 6px 18px rgba(255, 90, 95, 0.5);
+        transform: translateY(-3px);
+    }
+
+/* Secondary button (Explore Vacancies) */
+.hero-btn-secondary {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff !important;
+    border: 2px solid #fff;
+    box-shadow: 0px 4px 12px rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(6px);
+    padding: 9px 25px;
+}
+
+    .hero-btn-secondary:hover {
+        background: #fff;
+        color: #333 !important;
+        transform: translateY(-3px);
+        box-shadow: 0px 6px 18px rgba(255, 255, 255, 0.4);
+    }
+
+
+/* Why Choose Us Section */
+.why-choose-us {
+    padding: 60px 20px;
+    background: #f9f9f9;
+    text-align: center;
+}
+
+    .why-choose-us .section-title {
+        font-size: 2.2rem;
         font-weight: bold;
+        margin-bottom: 10px;
+        color: #222;
+    }
+
+    .why-choose-us .section-subtitle {
         font-size: 1rem;
-        transition: background 0.3s, transform 0.2s;
+        color: #666;
+        margin-bottom: 40px;
     }
 
-        .overlay-text a:hover {
-            background: linear-gradient(to right, #3a539b, #1c2833);
-            transform: scale(1.05);
-        }
+.cards-container {
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
 
-@media (max-width: 768px) {
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
+.choose-card {
+    background: #fff;
+    padding: 30px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    flex: 1 1 calc(33.333% - 25px);
+    max-width: 320px;
+    transition: all 0.3s ease-in-out;
+}
+
+    .choose-card .icon {
+        font-size: 40px;
+        color: #007bff;
+        margin-bottom: 15px;
     }
 
-        nav ul {
-            flex-direction: column;
-            width: 100%;
-            display: none;
-            margin-top: 10px;
-        }
-
-            nav ul.show {
-                display: flex;
-            }
-
-    .menu-toggle {
-        display: flex;
-        margin-top: 10px;
+    .choose-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 10px;
+        color: #222;
     }
 
-    .overlay-text h1 {
-        font-size: 2rem;
+    .choose-card p {
+        font-size: 0.95rem;
+        color: #555;
     }
 
-    .overlay-text p {
-        font-size: 1rem;
+    .choose-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+/* Responsive */
+@media (max-width: 992px) {
+    .choose-card {
+        flex: 1 1 calc(50% - 20px);
     }
 }
+
+@media (max-width: 600px) {
+    .choose-card {
+        flex: 1 1 100%;
+    }
+}
+
+
 
 /* Footer Styles */
 .footer {
