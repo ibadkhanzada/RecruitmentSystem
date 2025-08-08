@@ -9,9 +9,53 @@
     <img src="~/assets/img/hd1.jpg" alt="Image 1" />
     <img src="~/assets/img/hd2.jpg" alt="Image 2" />
     <img src="~/assets/img/hd3.jpg" alt="Image 3" />
+
     <div class="overlay-text">
-        <h1>Welcome to ABC Recruitment</h1>
-        <p>Your journey to success starts here. Discover new opportunities and let us connect you with your future.</p>
-        <a asp-controller="Accounts" asp-action="Register">Join With Us</a>
+        <h1>Find Your Dream Job</h1>
+        <p>
+            Step into a world of opportunities.
+            Connect with top employers and build the career you’ve always dreamed of.
+        </p> 
+        <div class="header-buttons">
+            <a asp-controller="Accounts" asp-action="Register" class="hero-btn hero-btn-primary">Get Started</a>
+            <a asp-controller="Vacancies" asp-action="Index" class="hero-btn hero-btn-secondary">Explore Vacancies</a>
+        </div>
     </div>
 </div>
+
+<!-- Why Choose Us Section -->
+<section class="why-choose-us">
+    <div class="container">
+        <h2 class="section-title">Why Choose Us</h2>
+        <p class="section-subtitle">ABC Recruitment helps you land your dream job with ease, efficiency, and trust.</p>
+
+        <div class="cards-container">
+            <!-- Card 1 -->
+            <div class="choose-card">
+                <div class="icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h3>Expert HR Team</h3>
+                <p>Our HR experts connect you with top employers and ensure smooth recruitment from application to onboarding.</p>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="choose-card">
+                <div class="icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Quick Process</h3>
+                <p>We value your time! Our streamlined system speeds up applications and interview scheduling.</p>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="choose-card">
+                <div class="icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Trusted Platform</h3>
+                <p>Thousands of applicants trust us for secure, transparent, and fair hiring processes.</p>
+            </div>
+        </div>
+    </div>
+</section>
