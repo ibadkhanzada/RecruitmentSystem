@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿// User.cs
+using System.ComponentModel.DataAnnotations;
 
 namespace RecruitmentSystem.Models
 {
