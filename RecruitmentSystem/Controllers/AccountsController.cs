@@ -16,13 +16,13 @@ namespace RecruitmentSystem.Controllers
         }
 
         [HttpGet]
-        public IActionResult Register()
+        public IActionResult ApplicantRequest()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Register(ApplicantsRequest model, IFormFile CvFile)
+        public IActionResult ApplicantRequest(ApplicantsRequest model, IFormFile CvFile)
         {
             if (!ModelState.IsValid)
             {
@@ -51,7 +51,7 @@ namespace RecruitmentSystem.Controllers
             _context.SaveChanges();
 
             TempData["Message"] = "Application submitted successfully!";
-            return RedirectToAction("Register");
+            return RedirectToAction("ApplicantRequest");
         }
     }
 }
