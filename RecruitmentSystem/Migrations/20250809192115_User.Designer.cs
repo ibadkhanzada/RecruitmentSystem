@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RecruitmentSystem.Models;
 
@@ -10,9 +11,11 @@ using RecruitmentSystem.Models;
 namespace RecruitmentSystem.Migrations
 {
     [DbContext(typeof(RecruitmentSystemDbContext))]
-    partial class RecruitmentSystemDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250809192115_User")]
+    partial class User
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

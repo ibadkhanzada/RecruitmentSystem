@@ -1,28 +1,74 @@
 ﻿@model RecruitmentSystem.Models.User
 
 @{
-    ViewData["Title"] = "Submit Application";
+    ViewData["Title"] = "Register";
     Layout = "~/Views/Shared/RegistrationLayout.cshtml";
 }
 
 <h2>Register</h2>
 
-<form asp-action="Register" method="post">
-    <div asp-validation-summary="All" class="text-danger"></div>
+<form asp-action="Register" method="post" class="form-container">
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" placeholder="Full Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
 
-    <input asp-for="Name" placeholder="Full Name" />
-    <span asp-validation-for="Name" class="text-danger"></span><br />
+    <div class="form-group">
+        <label asp-for="Email"></label>
+        <input asp-for="Email" class="form-control" placeholder="Email Address" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
 
-    <input asp-for="Email" placeholder="Email" />
-    <span asp-validation-for="Email" class="text-danger"></span><br />
+    <div class="form-group">
+        <label asp-for="Password"></label>
+        <input asp-for="Password" type="password" class="form-control" placeholder="Password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+    </div>
 
-    <input asp-for="Password" type="password" placeholder="Password" />
-    <span asp-validation-for="Password" class="text-danger"></span><br />
+    <div class="form-group">
+        <label asp-for="Role"></label>
+        <select asp-for="Role" class="form-control">
+            <option value="">-- Select Role --</option>
+            <option value="User">User</option>
+            <option value="HR">HR</option>
+            <option value="Interviewer">Interviewer</option>
+        </select>
+        <span asp-validation-for="Role" class="text-danger"></span>
+    </div>
 
-    <button type="submit">Register</button>
+    <button type="submit" class="btn btn-primary">Register</button>
 </form>
 
-@if (TempData["SuccessMessage"] != null)
-{
-    <div style="color:green">@TempData["SuccessMessage"]</div>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }
+
+<style>
+    .form-container {
+        max-width: 400px;
+        margin: 30px auto;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 8px 10px;
+        font-size: 16px;
+    }
+
+    .btn-primary {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+    }
+</style>
