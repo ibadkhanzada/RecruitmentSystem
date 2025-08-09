@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace RecruitmentSystem.Controllers
 {
-    public class AccountsController : Controller
+    public class ApplicantRequestController : Controller
     {
         private readonly RecruitmentSystemDbContext _context;
 
-        public AccountsController(RecruitmentSystemDbContext context)
+        public ApplicantRequestController(RecruitmentSystemDbContext context)
         {
             _context = context;
         }
