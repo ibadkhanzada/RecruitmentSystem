@@ -6,26 +6,17 @@ namespace RecruitmentSystem.Models
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Name is required")]
-        [StringLength(50)]
         public string Name { get; set; } = null!;
 
-        [Required(ErrorMessage = "Email is required")]
-        [EmailAddress(ErrorMessage = "Invalid email format")]
-        [StringLength(100)]
         public string Email { get; set; } = null!;
 
-        [Required(ErrorMessage = "Password is required")]
-        [DataType(DataType.Password)]
         public string Password { get; set; } = null!;
 
-        [Required(ErrorMessage = "Role is required")]
         public string Role { get; set; } = null!;
 
-        public string? DepartmentId { get; set; }
+        public string? DepartmentId { get; set; }   // Ye zaroori hai!
 
         public virtual Department? Department { get; set; }
-
-        public string ApplicantNumber { get; set; } = null!;
     }
+
 }

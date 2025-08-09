@@ -1,63 +1,45 @@
-﻿
-@{
-    ViewData["Title"] = "Register";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
+﻿@model RecruitmentSystem.Models.User
 
-@model RecruitmentSystem.Models.User
-@{
-    ViewData["Title"] = "Register";
-}
+<h2>Register</h2>
 
-<div class="container mt-5" style="max-width: 600px;">
-    <div class="card shadow-lg border-0 rounded-3">
-        <div class="card-header bg-success text-white text-center">
-            <h3>Register</h3>
-        </div>
-        <div class="card-body p-4">
-            <form asp-action="Register" method="post">
-                <div class="form-group mb-3">
-                    <label asp-for="Name" class="form-label"></label>
-                    <input asp-for="Name" class="form-control" placeholder="Enter your name" />
-                    <span asp-validation-for="Name" class="text-danger"></span>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label asp-for="Email" class="form-label"></label>
-                    <input asp-for="Email" class="form-control" placeholder="Enter your email" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label asp-for="Password" class="form-label"></label>
-                    <input asp-for="Password" class="form-control" placeholder="Enter your password" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-
-                <div class="form-group mb-3">
-                    <label asp-for="Role" class="form-label"></label>
-                    <select asp-for="Role" class="form-select">
-                        <option value="">Select Role</option>
-                        <option value="Admin">Admin</option>
-                        <option value="Applicant">Applicant</option>
-                    </select>
-                    <span asp-validation-for="Role" class="text-danger"></span>
-                </div>
-
-                <button type="submit" class="btn btn-success w-100">Register</button>
-
-                <div class="text-center mt-3">
-                    <small>Already have an account? <a asp-action="Login">Login here</a></small>
-                </div>
-            </form>
-        </div>
+<form asp-action="Register" method="post">
+    <div>
+        <label>Name</label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name" style="color:red"></span>
     </div>
-</div>
+
+    <div>
+        <label>Email</label>
+        <input asp-for="Email" />
+        <span asp-validation-for="Email" style="color:red"></span>
+    </div>
+
+    <div>
+        <label>Password</label>
+        <input asp-for="Password" type="password" />
+        <span asp-validation-for="Password" style="color:red"></span>
+    </div>
+
+    <div>
+        <label>Role</label>
+        <select asp-for="Role">
+            <option value="">Select Role</option>
+            <option value="HR">HR</option>
+            <option value="Interviewer">Interviewer</option>
+            <option value="User">User</option>
+        </select>
+        <span asp-validation-for="Role" style="color:red"></span>
+    </div>
+
+    <div>
+        <label>Department Id (optional)</label>
+        <input asp-for="DepartmentId" />
+    </div>
+
+    <button type="submit">Register</button>
+</form>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <partial name="_ValidationScriptsPartial" />
 }
-
-
