@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/RegistrationLayout.cshtml";
+}
+
+@model RecruitmentSystem.Models.User
+
+<form asp-action="Register" method="post">
+    <label>Name</label>
+    <input asp-for="Name" />
+    <span asp-validation-for="Name"></span>
+
+    <label>Email</label>
+    <input asp-for="Email" />
+    <span asp-validation-for="Email"></span>
+
+    <label>Password</label>
+    <input asp-for="Password" type="password" />
+    <span asp-validation-for="Password"></span>
+
+    <label>Role</label>
+    <input asp-for="Role" />
+    <span asp-validation-for="Role"></span>
+
+    <button type="submit">Register</button>
+</form>
+
