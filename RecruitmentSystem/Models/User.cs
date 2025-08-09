@@ -2,21 +2,22 @@
 
 namespace RecruitmentSystem.Models
 {
-    public partial class User
+    public class User
     {
         public int Id { get; set; }
 
-        public string Name { get; set; } = null!;
+        [Required(ErrorMessage = "Name is required")]
+        public string Name { get; set; }
 
-        public string Email { get; set; } = null!;
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid email format")]
+        public string Email { get; set; }
 
-        public string Password { get; set; } = null!;
+        [Required(ErrorMessage = "Password is required")]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
 
-        public string Role { get; set; } = null!;
-
-        public string? DepartmentId { get; set; }   // Ye zaroori hai!
-
-        public virtual Department? Department { get; set; }
+        [Required(ErrorMessage = "Role is required")]
+        public string Role { get; set; }
     }
-
 }

@@ -8,43 +8,21 @@
 <h2>Register</h2>
 
 <form asp-action="Register" method="post">
-    <div>
-        <label>Name</label>
-        <input asp-for="Name" />
-        <span asp-validation-for="Name" style="color:red"></span>
-    </div>
+    <div asp-validation-summary="All" class="text-danger"></div>
 
-    <div>
-        <label>Email</label>
-        <input asp-for="Email" />
-        <span asp-validation-for="Email" style="color:red"></span>
-    </div>
+    <input asp-for="Name" placeholder="Full Name" />
+    <span asp-validation-for="Name" class="text-danger"></span><br />
 
-    <div>
-        <label>Password</label>
-        <input asp-for="Password" type="password" />
-        <span asp-validation-for="Password" style="color:red"></span>
-    </div>
+    <input asp-for="Email" placeholder="Email" />
+    <span asp-validation-for="Email" class="text-danger"></span><br />
 
-    <div>
-        <label>Role</label>
-        <select asp-for="Role">
-            <option value="">Select Role</option>
-            <option value="HR">HR</option>
-            <option value="Interviewer">Interviewer</option>
-            <option value="User">User</option>
-        </select>
-        <span asp-validation-for="Role" style="color:red"></span>
-    </div>
-
-    <div>
-        <label>Department Id (optional)</label>
-        <input asp-for="DepartmentId" />
-    </div>
+    <input asp-for="Password" type="password" placeholder="Password" />
+    <span asp-validation-for="Password" class="text-danger"></span><br />
 
     <button type="submit">Register</button>
 </form>
 
-@section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+@if (TempData["SuccessMessage"] != null)
+{
+    <div style="color:green">@TempData["SuccessMessage"]</div>
 }

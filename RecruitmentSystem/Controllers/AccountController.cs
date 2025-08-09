@@ -13,30 +13,31 @@ namespace RecruitmentSystem.Controllers
             _context = context;
         }
 
-        // Register GET
+        // GET: /Account/Register
         [HttpGet]
         public IActionResult Register()
         {
             return View();
         }
 
-        // Register POST
+        // POST: /Account/Register
         [HttpPost]
         public IActionResult Register(User model)
         {
             if (!ModelState.IsValid)
-                return View(model);
-
-            // Email uniqueness check
-            var userExists = _context.Users.Any(u => u.Email == model.Email);
-            if (userExists)
             {
-                ModelState.AddModelError("Email", "Email already registered");
                 return View(model);
             }
 
-            // Simple password hashing (optional, recommend hashing)
-            // model.Password = HashPassword(model.Password);
+            // Check if email already exists
+            if (_context.Users.Any(u => u.Email == model.Email))
+            {
+                ModelState.AddModelError("Email", "Email is already registered");
+                return View(model);
+            }
+
+            // Default role user
+            model.Role = "User";
 
             _context.Users.Add(model);
             _context.SaveChanges();
@@ -45,52 +46,47 @@ namespace RecruitmentSystem.Controllers
             return RedirectToAction("Login");
         }
 
-        // Login GET
+        // GET: /Account/Login
         [HttpGet]
         public IActionResult Login()
         {
             return View();
         }
 
-        // Login POST
+        // POST: /Account/Login
         [HttpPost]
-        public IActionResult Login(string email, string password)
+        public IActionResult Login(LoginViewModel model)
         {
-            if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+            if (!ModelState.IsValid)
             {
-                ViewBag.Error = "Email and Password are required";
-                return View();
+                return View(model);
             }
 
-            var user = _context.Users
-                .FirstOrDefault(u => u.Email == email && u.Password == password);
+            var user = _context.Users.FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
 
             if (user == null)
             {
-                ViewBag.Error = "Invalid email or password";
-                return View();
+                ModelState.AddModelError("", "Invalid Email or Password");
+                return View(model);
             }
 
-            // Save user info in session for later use
-            HttpContext.Session.SetString("UserName", user.Name);
-            HttpContext.Session.SetInt32("UserId", user.Id);
-            HttpContext.Session.SetString("UserRole", user.Role);
-
-            // Redirect based on role
-            if (user.Role == "HR")
-                return RedirectToAction("DashboardHR", "Dashboard");
-            else if (user.Role == "Interviewer")
-                return RedirectToAction("DashboardInterviewer", "Dashboard");
-            else
-                return RedirectToAction("Index", "Home");  // Normal user
-
+            // Login success - Redirect to UserDashboard
+            return RedirectToAction("UserDashboard", new { id = user.Id });
         }
 
-        // Logout
-        public IActionResult Logout()
+        // GET: /Account/UserDashboard/5
+        public IActionResult UserDashboard(int id)
         {
-            HttpContext.Session.Clear();
-            return RedirectToAction("Login");
+            var user = _context.Users.Find(id);
+            if (user == null)
+            {
+                return RedirectToAction("Login");
+            }
+
+            ViewBag.UserName = user.Name;
+            ViewBag.UserId = user.Id;
+
+            return View();
         }
     }
 }
