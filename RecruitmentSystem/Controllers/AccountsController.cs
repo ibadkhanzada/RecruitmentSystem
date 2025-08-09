@@ -53,10 +53,5 @@ namespace RecruitmentSystem.Controllers
             TempData["Message"] = "Application submitted successfully!";
             return RedirectToAction("Register");
         }
-
-        public IActionResult Login()
-        {
-            return View();
-        }
     }
 }
