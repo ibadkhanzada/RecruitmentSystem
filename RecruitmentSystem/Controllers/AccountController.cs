@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 using RecruitmentSystem.Models;
 using System.Linq;
 
@@ -79,12 +80,34 @@ namespace RecruitmentSystem.Controllers
                 return View(model);
             }
 
+            // Placeholder path
+            string placeholderImage = "/assets/img/default-avatar.png";
+
+            // Profile image path set karo
+            string profileImagePath = string.IsNullOrEmpty(user.ProfileImagePath)
+                ? placeholderImage
+                : user.ProfileImagePath;
+
+            // Session me store karo
+            HttpContext.Session.SetString("UserName", user.Name ?? "");
+            HttpContext.Session.SetString("UserRole", user.Role ?? "");
+            HttpContext.Session.SetString("UserEmail", user.Email ?? "");
+            HttpContext.Session.SetString("UserProfileImage", profileImagePath);
+
+            // Redirect based on role
             if (user.Role == "HR")
-                return RedirectToAction("Index", "HR");  // HRController ke Index action pe redirect
+                return RedirectToAction("Index", "HR");
             else if (user.Role == "Interviewer")
                 return RedirectToAction("InterviewerDashboard", "Dashboard", new { id = user.Id });
             else
                 return RedirectToAction("Index", "Home");
+        }
+
+        // GET: /Account/Logout
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

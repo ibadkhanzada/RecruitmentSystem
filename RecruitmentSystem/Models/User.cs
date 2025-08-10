@@ -20,5 +20,7 @@ namespace RecruitmentSystem.Models
 
         [Required(ErrorMessage = "Role is required")]
         public string Role { get; set; }
+        public string? ProfileImagePath { get; set; }
+
     }
 }

@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -7,10 +10,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="~/assets/css/style.css" asp-append-version="true" />
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 </head>
 <body>
 
@@ -29,66 +28,35 @@
             <li><a href="#">Vacancies</a></li>
             <li><a href="#">Apply</a></li>
             <li><a href="#">Contact</a></li>
-            <li>
-                <a asp-controller="Account" asp-action="Login" class="login-btn">Login</a>
-            </li>
+
+            @if (string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("UserName")))
+            {
+                <li>
+                    <a asp-controller="Account" asp-action="Login" class="login-btn">Login</a>
+                </li>
+            }
+            else
+            {
+                var userImage = HttpContextAccessor.HttpContext.Session.GetString("UserProfileImage");
+                var userName = HttpContextAccessor.HttpContext.Session.GetString("UserName");
+
+                if (string.IsNullOrEmpty(userImage))
+                {
+                    userImage = "/assets/img/default-avatar.png"; // Fallback image
+                }
+
+                <li class="nav-profile" style="display:flex;align-items:center;gap:10px;">
+                    <img src="@userImage" alt="Profile" style="width:32px;height:32px;border-radius:50%;object-fit:cover;" />
+                    <span>@userName</span>
+                    <a asp-controller="Account" asp-action="Logout" style="margin-left:10px;">Logout</a>
+                </li>
+            }
         </ul>
     </nav>
 
-
-    <!-- Body Content -->
     <main role="main" class="container">
         @RenderBody()
     </main>
-
-
-    <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-section">
-                <div class="footer-logo">CompanyName</div>
-                <p>We create innovative solutions that make life easier and businesses better.</p>
-                <div class="social-links">
-                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-            </div>
-
-            <div class="footer-section">
-                <h5>Quick Links</h5>
-                <ul class="footer-links">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Services</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h5>Support</h5>
-                <ul class="footer-links">
-                    <li><a href="#">FAQ</a></li>
-                    <li><a href="#">Help Center</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h5>Newsletter</h5>
-                <p>Stay in touch. Subscribe to receive updates and news.</p>
-                <div class="footer-newsletter">
-                    <input type="email" placeholder="Enter your email" />
-                    <button class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-          
-            <p>© 2025 CompanyName. All Rights Reserved.</p>
-        </div>
-    </footer>
 
     <script>
         function toggleMenu() {
@@ -98,4 +66,3 @@
     </script>
 </body>
 </html>
-
