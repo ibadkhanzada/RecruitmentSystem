@@ -15,7 +15,7 @@ nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #2c3e50;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     padding: 15px 30px;
     position: fixed;
     top: 0;
@@ -105,7 +105,7 @@ nav ul {
         top: 65px;
         right: -220px; /* hide by default */
         flex-direction: column;
-        background-color: #2c3e50;
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
         width: 200px;
         padding: 20px;
     }
@@ -180,14 +180,14 @@ nav ul {
 
 /* Primary button (Get Started) */
 .hero-btn-primary {
-    background: linear-gradient(135deg, #0d47a1, #1976d2);
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     color: #fff !important;
     box-shadow: 0px 4px 12px rgba(255, 90, 95, 0.3);
     border: none;
 }
 
     .hero-btn-primary:hover {
-        background: linear-gradient(135deg, #08306b, #1565c0);
+        background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
         box-shadow: 0px 6px 18px rgba(255, 90, 95, 0.5);
         transform: translateY(-3px);
     }
@@ -378,14 +378,14 @@ nav ul {
 
     .choose-card .icon {
         font-size: 40px;
-        color: #007bff;
+        color: #24434f;
         margin-bottom: 15px;
     }
 
     .choose-card h3 {
         font-size: 1.3rem;
         margin-bottom: 10px;
-        color: #222;
+        color: #24434f;
     }
 
     .choose-card p {
@@ -496,6 +496,50 @@ nav ul {
         opacity: 0.15;
         z-index: 1;
     }
+    #services-section .btn-explore {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 8px 24px; /* Smaller padding for smaller button */
+        color: #00ffff; /* Neon cyan */
+        font-weight: 700;
+        text-decoration: none;
+        border: 2px solid #00ffff;
+        background: transparent;
+        position: relative;
+        overflow: hidden;
+        transition: color 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+        border-radius: 6px; /* Slightly rounded corners */
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        box-shadow: 0 0 8px white;
+        line-height: 1.2; /* Fix vertical alignment */
+        vertical-align: middle;
+        white-space: nowrap; /* Prevent text wrap */
+    }
+
+        #services-section .btn-explore::before {
+            content: "";
+            position: absolute;
+            left: -100%;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #00ffff, transparent);
+            transition: left 0.5s ease;
+            z-index: 0;
+        }
+
+        #services-section .btn-explore:hover {
+            color: #001f22;
+            background: white;
+            box-shadow: 0 0 20px #00ffffcc, 0 0 40px #00ffffbb;
+        }
+
+            #services-section .btn-explore:hover::before {
+                left: 100%;
+            }
 
 @keyframes gradientFlow {
     0% {
