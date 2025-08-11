@@ -1,45 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace RecruitmentSystem.Models;
-
-public partial class RecruitmentSystemDbContext : DbContext
+namespace RecruitmentSystem.Models
 {
-    public RecruitmentSystemDbContext()
+    public partial class RecruitmentSystemDbContext : DbContext
     {
-    }
-
-    public RecruitmentSystemDbContext(DbContextOptions<RecruitmentSystemDbContext> options)
-        : base(options)
-    {
-    }
-
-    public virtual DbSet<Vacancy> Vacancies { get; set; }
-    public object Users { get; internal set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=.;Database=RecruitmentSystem_db;Trusted_Connection=True;TrustServerCertificate=True;");
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<Vacancy>(entity =>
+        public RecruitmentSystemDbContext(DbContextOptions<RecruitmentSystemDbContext> options)
+            : base(options)
         {
-            entity.HasKey(e => e.VacancyId).HasName("PK__Vacancie__6456763FBD88EBC3");
+        }
 
-            entity.Property(e => e.CompanyLogo).HasMaxLength(500);
-            entity.Property(e => e.EmploymentType).HasMaxLength(50);
-            entity.Property(e => e.Location).HasMaxLength(100);
-            entity.Property(e => e.PostedDate)
-                .HasDefaultValueSql("(getdate())")
-                .HasColumnType("datetime");
-            entity.Property(e => e.Salary).HasMaxLength(50);
-            entity.Property(e => e.Title).HasMaxLength(200);
-        });
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Vacancy> Vacancies { get; set; }
+        public virtual DbSet<ApplicantsRequest> ApplicantsRequests { get; set; }
 
-        OnModelCreatingPartial(modelBuilder);
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Users table config
+            modelBuilder.Entity<User>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Email).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Password).IsRequired();
+            });
+
+            // Vacancies table config
+            modelBuilder.Entity<Vacancy>(entity =>
+            {
+                entity.HasKey(e => e.VacancyId);
+                entity.Property(e => e.Title).IsRequired().HasMaxLength(200);
+                entity.Property(e => e.Description).IsRequired();
+                entity.Property(e => e.Location).HasMaxLength(200);
+                entity.Property(e => e.EmploymentType).HasMaxLength(100);
+                entity.Property(e => e.Salary).HasMaxLength(50);
+                entity.Property(e => e.CompanyLogo).HasMaxLength(500);
+            });
+
+            // ApplicantsRequests table config
+            modelBuilder.Entity<ApplicantsRequest>(entity =>
+            {
+                entity.HasKey(e => e.Id);
+                entity.Property(e => e.FullName).IsRequired().HasMaxLength(150);
+                entity.Property(e => e.Email).IsRequired().HasMaxLength(150);
+                entity.Property(e => e.Phone).IsRequired().HasMaxLength(50);
+                entity.Property(e => e.City).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.Region).IsRequired().HasMaxLength(100);
+                entity.Property(e => e.AreaOfExpertise).IsRequired().HasMaxLength(200);
+                entity.Property(e => e.YearsOfExperience).IsRequired();
+                entity.Property(e => e.CvFilePath).HasMaxLength(500);
+                entity.Property(e => e.LinkedInProfile).IsRequired().HasMaxLength(300);
+                entity.Property(e => e.AdditionalComments).HasMaxLength(1000);
+            });
+        }
     }
-
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

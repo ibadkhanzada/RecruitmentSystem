@@ -4,7 +4,7 @@ namespace RecruitmentSystem.Controllers
 {
     public class VacancyController : Controller
     {
-        public IActionResult Index()
+        public IActionResult Vacancies()
         {
             return View();
         }
