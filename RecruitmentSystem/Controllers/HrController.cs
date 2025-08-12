@@ -1,18 +1,25 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using RecruitmentSystem.Models;
+using System.Linq;
 
 namespace RecruitmentSystem.Controllers
 {
     public class HrController : Controller
     {
-        HrdataContext db = new HrdataContext();
+        private readonly RecruitmentSystemDbContext _context;
+
+        public HrController(RecruitmentSystemDbContext context)
+        {
+            _context = context;
+        }
 
         public IActionResult Index()
         {
             return View();
         }
 
+        // ---------- Department Management ----------
         public IActionResult Adddepartment()
         {
             return View();
@@ -21,81 +28,88 @@ namespace RecruitmentSystem.Controllers
         [HttpPost]
         public IActionResult Adddepartment(AddDepartment add)
         {
-            db.AddDepartments.Add(add);
-            db.SaveChanges();
-            return RedirectToAction("Adddepartment");
+            if (ModelState.IsValid)
+            {
+                _context.AddDepartments.Add(add);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Adddepartment));
+            }
+            return View(add);
         }
 
-        // GET: Createvacancy
+        // ---------- Vacancy Management ----------
         public IActionResult Createvacancy()
         {
-            var departments = db.AddDepartments.ToList();
-            ViewBag.adddepartment = new SelectList(departments, "DepartmentId", "DepartmentName");
+            ViewBag.adddepartment = new SelectList(_context.AddDepartments.ToList(), "DepartmentId", "DepartmentName");
             return View();
         }
 
-        // POST: Createvacancy
         [HttpPost]
         public IActionResult Createvacancy(Vacancy vc)
         {
-            db.Vacancies.Add(vc);
-            db.SaveChanges();
-            return RedirectToAction("viewvacancies");
-
+            if (ModelState.IsValid)
+            {
+                _context.Vacancies.Add(vc);
+                _context.SaveChanges();
+                return RedirectToAction(nameof(viewvacancies));
+            }
+            ViewBag.adddepartment = new SelectList(_context.AddDepartments.ToList(), "DepartmentId", "DepartmentName");
+            return View(vc);
         }
 
         public IActionResult viewvacancies()
         {
-            var datashow = db.Vacancies.ToList();
+            var datashow = _context.Vacancies.ToList();
             return View(datashow);
         }
 
         public IActionResult delete(int id)
         {
-            var dataitem = db.Vacancies.FirstOrDefault(c => c.VacancyId == id);
+            var dataitem = _context.Vacancies.FirstOrDefault(c => c.VacancyId == id);
             if (dataitem != null)
             {
-                db.Vacancies.Remove(dataitem);
-                db.SaveChanges();
+                _context.Vacancies.Remove(dataitem);
+                _context.SaveChanges();
             }
-            return RedirectToAction("viewvacancies");
-
-            
+            return RedirectToAction(nameof(viewvacancies));
         }
 
         public IActionResult editvacancy(int id)
         {
-            var dataitem = db.Vacancies.FirstOrDefault(c => c.VacancyId == id);
-            ViewBag.adddepartment = new SelectList(db.AddDepartments.ToList(), "DepartmentId", "DepartmentName");
+            var dataitem = _context.Vacancies.FirstOrDefault(c => c.VacancyId == id);
+            if (dataitem == null)
+            {
+                return NotFound();
+            }
+            ViewBag.adddepartment = new SelectList(_context.AddDepartments.ToList(), "DepartmentId", "DepartmentName");
             return View(dataitem);
         }
 
         [HttpPost]
         public IActionResult editvacancy(Vacancy vac, int id)
         {
-            var existing = db.Vacancies.Find(id);
+            var existing = _context.Vacancies.Find(id);
             if (existing == null)
             {
                 return NotFound();
             }
 
-            existing.JobTitle = vac.JobTitle;
-            existing.DepartmentId = vac.DepartmentId;
-            existing.Country = vac.Country;
-            existing.City = vac.City;
-            existing.JobDescription = vac.JobDescription;
-            existing.ListOfHired = vac.ListOfHired;
-            existing.Owner = vac.Owner;
-            existing.Status = vac.Status;
+            existing.Title = vac.Title;
+            existing.Description = vac.Description;
+            existing.Location = vac.Location;
+            existing.EmploymentType = vac.EmploymentType;
+            existing.Salary = vac.Salary;
             existing.PostedDate = vac.PostedDate;
             existing.ClosingDate = vac.ClosingDate;
+            existing.CompanyLogo = vac.CompanyLogo;
 
-            db.Vacancies.Update(existing);
-            db.SaveChanges();
+            _context.Vacancies.Update(existing);
+            _context.SaveChanges();
 
-            return RedirectToAction("viewvacancies");
+            return RedirectToAction(nameof(viewvacancies));
         }
 
+        // ---------- Other Views ----------
         public IActionResult ScheduleInterview()
         {
             return View();

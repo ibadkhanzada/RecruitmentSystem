@@ -12,18 +12,10 @@ namespace RecruitmentSystem.Models
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Vacancy> Vacancies { get; set; }
         public virtual DbSet<ApplicantsRequest> ApplicantsRequests { get; set; }
+        public virtual DbSet<AddDepartment> AddDepartments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Users table config
-            modelBuilder.Entity<User>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
-                entity.Property(e => e.Email).IsRequired().HasMaxLength(100);
-                entity.Property(e => e.Password).IsRequired();
-            });
-
             // Vacancies table config
             modelBuilder.Entity<Vacancy>(entity =>
             {
@@ -34,22 +26,8 @@ namespace RecruitmentSystem.Models
                 entity.Property(e => e.EmploymentType).HasMaxLength(100);
                 entity.Property(e => e.Salary).HasMaxLength(50);
                 entity.Property(e => e.CompanyLogo).HasMaxLength(500);
-            });
-
-            // ApplicantsRequests table config
-            modelBuilder.Entity<ApplicantsRequest>(entity =>
-            {
-                entity.HasKey(e => e.Id);
-                entity.Property(e => e.FullName).IsRequired().HasMaxLength(150);
-                entity.Property(e => e.Email).IsRequired().HasMaxLength(150);
-                entity.Property(e => e.Phone).IsRequired().HasMaxLength(50);
-                entity.Property(e => e.City).IsRequired().HasMaxLength(100);
-                entity.Property(e => e.Region).IsRequired().HasMaxLength(100);
-                entity.Property(e => e.AreaOfExpertise).IsRequired().HasMaxLength(200);
-                entity.Property(e => e.YearsOfExperience).IsRequired();
-                entity.Property(e => e.CvFilePath).HasMaxLength(500);
-                entity.Property(e => e.LinkedInProfile).IsRequired().HasMaxLength(300);
-                entity.Property(e => e.AdditionalComments).HasMaxLength(1000);
+                entity.Property(e => e.PostedDate).HasColumnType("datetime");
+                entity.Property(e => e.ClosingDate).HasColumnType("datetime");
             });
         }
     }
