@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿// User.cs
+using System.ComponentModel.DataAnnotations;
 
 namespace RecruitmentSystem.Models
 {
@@ -19,5 +20,7 @@ namespace RecruitmentSystem.Models
 
         [Required(ErrorMessage = "Role is required")]
         public string Role { get; set; }
+        public string? ProfileImagePath { get; set; }
+
     }
 }

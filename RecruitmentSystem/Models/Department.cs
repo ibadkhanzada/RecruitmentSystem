@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace RecruitmentSystem.Models;
-
-public partial class Department
+﻿// Department.cs
+namespace RecruitmentSystem.Models
 {
-    public string DepartmentId { get; set; } = null!;
+    public partial class Department
+    {
+        public string DepartmentId { get; set; } = null!;
 
-    public string DepartmentName { get; set; } = null!;
+        public string DepartmentName { get; set; } = null!;
 
-    public virtual ICollection<User> Users { get; set; } = new List<User>();
-
-
+        // Remove this navigation property
+        // public virtual ICollection<User> Users { get; set; } = new List<User>();
+    }
 }

@@ -11,8 +11,8 @@ using RecruitmentSystem.Models;
 namespace RecruitmentSystem.Migrations
 {
     [DbContext(typeof(RecruitmentSystemDbContext))]
-    [Migration("20250809192115_User")]
-    partial class User
+    [Migration("20250809212612_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -86,8 +86,7 @@ namespace RecruitmentSystem.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("DepartmentId")
-                        .HasName("PK__Departme__B2079BED3873E238");
+                    b.HasKey("DepartmentId");
 
                     b.ToTable("Departments");
                 });
@@ -99,9 +98,6 @@ namespace RecruitmentSystem.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("DepartmentId")
-                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -123,27 +119,12 @@ namespace RecruitmentSystem.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.HasKey("Id")
-                        .HasName("PK__Users__3214EC0794F0B1E2");
-
-                    b.HasIndex("DepartmentId");
+                    b.HasKey("Id");
 
                     b.HasIndex("Email")
                         .IsUnique();
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("RecruitmentSystem.Models.User", b =>
-                {
-                    b.HasOne("RecruitmentSystem.Models.Department", null)
-                        .WithMany("Users")
-                        .HasForeignKey("DepartmentId");
-                });
-
-            modelBuilder.Entity("RecruitmentSystem.Models.Department", b =>
-                {
-                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

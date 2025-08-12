@@ -3,8 +3,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<!-- Header with Slider -->
+<!-- Hero / Slider Section -->
 <div class="slider-container">
     <img src="~/assets/img/hd1.jpg" alt="Image 1" />
     <img src="~/assets/img/hd2.jpg" alt="Image 2" />
@@ -15,47 +14,178 @@
         <p>
             Step into a world of opportunities.
             Connect with top employers and build the career you’ve always dreamed of.
-        </p> 
+        </p>
         <div class="header-buttons">
-            <a asp-controller="Accounts" asp-action="ApplicantRequest" class="hero-btn hero-btn-primary">Get Started</a>
-            <a asp-controller="Vacancies" asp-action="Index" class="hero-btn hero-btn-secondary">Explore Vacancies</a>
+            <a href="#" class="hero-btn hero-btn-primary">Get Started</a>
+            <a href="#" class="hero-btn hero-btn-secondary">Explore Vacancies</a>
         </div>
     </div>
 </div>
 
+<!-- About Us Section -->
+<section class="about-us-section">
+    <div class="about-container">
+        <!-- Left Side Text -->
+        <div class="about-text" data-aos="fade-right" data-aos-duration="1500">
+            <span class="section-subtitle">Who We Are</span>
+            <h2>About Us</h2>
+            <p>
+                At <strong>ABC Recruitment</strong>, we connect talented professionals with leading companies across industries.
+                Our mission is to make the hiring process smooth, transparent, and effective for both employers and job seekers.
+            </p>
+            <p>
+                Whether you're looking for your dream job or seeking the perfect candidate,
+                our platform is your trusted recruitment partner.
+            </p>
+            <a href="/Home/About" class="about-btn">Learn More</a>
+        </div>
+
+        <!-- Right Side Images -->
+        <div class="about-images" data-aos="fade-left" data-aos-duration="1500">
+            <img src="~/assets/img/hd2.jpg" alt="About Image 1" class="img1">
+            <img src="~/assets/img/hd3.jpg" alt="About Image 2" class="img2">
+            <img src="~/assets/img/hd1.jpg" alt="About Image 3" class="img3">
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services-section">
+    <div class="container" id="parallax-area">
+        <div class="card tilt-card">
+            <h1>Talent Acquisition & Recruitment</h1>
+            <p>Streamlined hiring process to find the right candidates quickly and efficiently.</p>
+            <ul>
+                <li>Job vacancy creation & posting</li>
+                <li>Candidate screening & shortlisting</li>
+                <li>Interview scheduling & feedback management</li>  
+            </ul>
+            <a href="/vacancies" class="btn-explore">Explore</a>
+        </div>
+
+        <div class="card tilt-card">
+            <h1>Custom Website Development</h1>
+            <p>Modern, responsive websites tailored to your business needs.</p>
+            <ul>
+                <li>Responsive frontend development (HTML, CSS, JS)</li>
+                <li>CMS & WordPress custom themes/plugins</li>
+                <li>SEO friendly & performance optimized sites</li>
+            </ul>
+            <a href="/vacancies" class="btn-explore">Explore</a>
+        </div>
+
+        <div class="card tilt-card">
+            <h1>UI/UX Design Services</h1>
+            <p>User-centered designs that engage and convert visitors very well.</p>
+            <ul>
+                <li>Wireframes & prototypes using Figma and Adobe XD</li>
+                <li>Interactive & accessible user interfaces</li>
+                <li>Branding & visual identity creation</li>
+            </ul>
+            <a href="/vacancies" class="btn-explore">Explore</a>
+        </div>
+
+        <div class="card tilt-card">
+            <h1>Digital Marketing & SEO</h1>
+            <p>Boost your online presence and drive more traffic.</p>
+            <ul>
+                <li>Search Engine Optimization (SEO)</li>
+                <li>Social media strategy & management</li>
+                <li>Content creation & campaign analytics</li>
+            </ul>
+            <a href="/vacancies" class="btn-explore">Explore</a>
+        </div>
+
+        <div class="circle" id="glow-circle"></div>
+
+        <!-- Floating Bubbles -->
+        <div class="floating" style="top: 10%; left: 15%"></div>
+        <div class="floating" style="top: 80%; left: 70%"></div>
+        <div class="floating" style="top: 40%; left: 40%"></div>
+        <div class="floating" style="top: 25%; left: 85%"></div>
+    </div>
+</section>
+
 <!-- Why Choose Us Section -->
-<section class="why-choose-us">
+<section class="why-choose-us" data-aos="fade-up" data-aos-duration="1500">
     <div class="container">
         <h2 class="section-title">Why Choose Us</h2>
         <p class="section-subtitle">ABC Recruitment helps you land your dream job with ease, efficiency, and trust.</p>
 
         <div class="cards-container">
-            <!-- Card 1 -->
-            <div class="choose-card">
-                <div class="icon">
-                    <i class="fas fa-briefcase"></i>
-                </div>
+            <div class="choose-card" data-aos="zoom-in" data-aos-delay="100">
+                <div class="icon"><i class="fas fa-briefcase"></i></div>
                 <h3>Expert HR Team</h3>
                 <p>Our HR experts connect you with top employers and ensure smooth recruitment from application to onboarding.</p>
             </div>
 
-            <!-- Card 2 -->
-            <div class="choose-card">
-                <div class="icon">
-                    <i class="fas fa-clock"></i>
-                </div>
+            <div class="choose-card" data-aos="zoom-in" data-aos-delay="200">
+                <div class="icon"><i class="fas fa-clock"></i></div>
                 <h3>Quick Process</h3>
                 <p>We value your time! Our streamlined system speeds up applications and interview scheduling.</p>
             </div>
 
-            <!-- Card 3 -->
-            <div class="choose-card">
-                <div class="icon">
-                    <i class="fas fa-shield-alt"></i>
-                </div>
+            <div class="choose-card" data-aos="zoom-in" data-aos-delay="300">
+                <div class="icon"><i class="fas fa-shield-alt"></i></div>
                 <h3>Trusted Platform</h3>
                 <p>Thousands of applicants trust us for secure, transparent, and fair hiring processes.</p>
             </div>
         </div>
     </div>
 </section>
+
+<!--  Current Vacancies section-->
+
+<!-- vacancies Script -->
+
+ 
+<!-- AOS Script -->
+<script>
+    AOS.init();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+<script>
+        const container = document.querySelector('#services-section #parallax-area');
+    const cards = document.querySelectorAll('#services-section .tilt-card');
+    const glow = document.querySelector('#services-section #glow-circle');
+
+    if (container) {
+      container.addEventListener('mousemove', (e) => {
+        const { width, height, left, top } = container.getBoundingClientRect();
+        const x = e.clientX - left - width / 2;
+        const y = e.clientY - top - height / 2;
+        const rotateX = (y / height) * -15;
+        const rotateY = (x / width) * 15;
+
+        cards.forEach(card => {
+          card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        if (glow) {
+          glow.style.left = `${e.clientX - left}px`;  // relative to container
+          glow.style.top = `${e.clientY - top}px`;
+        }
+      });
+
+      container.addEventListener('mouseleave', () => {
+        cards.forEach(card => {
+          card.style.transform = `rotateX(0deg) rotateY(0deg)`;
+        });
+      });
+
+      // Floating bubbles animation with GSAP
+      gsap.to("#services-section .floating", {
+        y: 20,
+        repeat: -1,
+        yoyo: true,
+        duration: 3,
+        ease: "sine.inOut",
+        stagger: 0.3
+      });
+    }
+
+</script>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
