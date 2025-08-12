@@ -1,8 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Createvacancy";
+﻿
+@{
+    ViewData["Title"] = "editvacancy";
     Layout = "~/Views/Shared/_hrLayout.cshtml";
 }
-
 
 @model RecruitmentSystem.Models.Vacancy
 
@@ -14,7 +14,7 @@
                 </div>
                 <div class="card-body">
                     <p class="text-uppercase text-sm">Job Information</p>
-                    <form asp-action="Createvacancy" enctype="multipart/form-data">
+                    <form asp-action="editvacancy">
                         <div class="row">
                             @* =============================TITLE================================ *@
                             <div class="col-md-6">
@@ -82,12 +82,14 @@
                                     <input class="form-control" type="text" placeholder="Enter job list of hired applicant" required asp-for="ListOfHired">
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                         @* =============================CONTACT INFORMATION================================ *@
+
                         <hr class="horizontal dark">
                         <p class="text-uppercase text-sm">Location</p>
                         <div class="row">
+
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">City</label>
@@ -100,11 +102,17 @@
                                     <input class="form-control" type="text" asp-for="Country">
                                 </div>
                             </div>
+
                         </div>
-                        <button class="btn btn-primary" type="submit" name="btn">ADD</button>
+
+                        <button class="btn btn-primary" type="btn">Update</button>
                     </form>
                 </div>
+
             </div>
         </div>
+
     </div>
+
 </div>
+

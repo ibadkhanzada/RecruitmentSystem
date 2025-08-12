@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "viewvacancies";
     Layout = "~/Views/Shared/_hrLayout.cshtml";
 }
@@ -7,93 +6,59 @@
 <!-- Table Start -->
 <div class="container-fluid pt-4 px-4">
     <div class="row g-4">
-
-        <div class="col-12">
-            <div class="bg-light rounded h-100 p-4">
-                <h6 class="mb-4">Vacancies List</h6>
-                <div class="table-responsive">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">id</th>
-                                <th scope="col">Creation Date</th>
-                                <th scope="col">Title</th>
-                                <th scope="col">Department</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">No.Of Openings</th>
-                                <th scope="col">List of Hired<th>
-                                <th scope="col">Country</th>
-                                <th scope="col">City</th>
-                                <th scope="col">Closer Date</th>
-                                <th scope="col">Edit</th>
-                                <th scope="col">Delete</th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                         
+        <div class="col-md-11 mx-auto">
+            <div class="col-12">
+                <div class="bg-light rounded h-100 p-4">
+                    <h6 class="mb-4">Vacancies List</h6>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
                                 <tr>
-                                    <th scope="row"><th>
-                                    <td></td>
-                                    <td>
-                                        <a>
-                                            @* <button class="btn btn-warning">Edit</button> *@
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a>
-                                            @* <button class="btn btn-danger">Delete</button> *@
-                                        </a>
-                                    </td>
-                                    <td>
-                                        <a>
-                                            @* <button class="btn btn-danger">Delete</button> *@
-                                        </a>
-                                    </td>
-                                <td>
-                                    <a>
-                                        @* <button class="btn btn-danger">Delete</button> *@
-                                    </a>
-                                </td>
-                                <td>
-                                    <a>
-                                        @* <button class="btn btn-danger">Delete</button> *@
-                                    </a>
-                                </td>
-                                <td>
-                                    <a>
-                                        @* <button class="btn btn-danger">Delete</button> *@
-                                    </a>
-                                </td>
-                                <td>
-                                    <a>
-                                        @* <button class="btn btn-danger">Delete</button> *@
-                                    </a>
-                                </td>
-                                <td>
-                                    <a>
-                                        @* <button class="btn btn-danger">Delete</button> *@
-                                    </a>
-                                </td>
-                                <td>
-                                    <a>
-                                        @* <button class="btn btn-danger">Delete</button> *@
-                                    </a>
-                                </td>
-                                <td>
-                                    <a>
-                                        @* <button class="btn btn-danger">Delete</button> *@
-                                    </a>
-                                </td>
-                                <td>
-                                    <a>
-                                        @* <button class="btn btn-danger">Delete</button> *@
-                                    </a>
-                                </td>
+                                    <th scope="col">Id</th>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Department</th>
+                                    <th scope="col">Country</th>
+                                    <th scope="col">City</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">List of Hired</th>
+                                    <th scope="col">Owner</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Creation Date</th>
+                                    <th scope="col">Closer Date</th>
+                                    <th scope="col">Edit</th>
+                                    <th scope="col">Delete</th>
                                 </tr>
-                            
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.VacancyId</td>
+                                        <td>@item.JobTitle</td>
+                                        <td>@item.DepartmentId</td>
+                                        <td>@item.Country</td>
+                                        <td>@item.City</td>
+                                        <td>@item.JobDescription</td>
+                                        <td>@item.ListOfHired</td>
+                                        <td>@item.Owner</td>
+                                        <td>@item.Status</td>
+                                        <td>@item.PostedDate.ToString("MM/dd/yyyy")</td>
+                                        <td>@item.ClosingDate?.ToString("MM/dd/yyyy")</td>
+                                        <td>
+                                            <a asp-action="editvacancy" asp-route-id="@item.VacancyId">
+                                                <button class="btn btn-warning">Edit</button>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a asp-action="delete" asp-route-id="@item.VacancyId">
+                                                <button class="btn btn-danger">Delete</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
