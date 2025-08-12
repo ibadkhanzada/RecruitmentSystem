@@ -7,25 +7,17 @@ public partial class Vacancy
 {
     public int VacancyId { get; set; }
 
-    public string JobTitle { get; set; } = null!;
+    public string Title { get; set; } = null!;
 
-    public int DepartmentId { get; set; }
+    public string Description { get; set; } = null!;
 
-    public string Country { get; set; } = null!;
+    public string? Location { get; set; }
 
-    public string City { get; set; } = null!;
+    public string? EmploymentType { get; set; }
 
-    public string? JobDescription { get; set; }
+    public string? Salary { get; set; }
 
-    public string ListOfHired { get; set; } = null!;
+    public DateTime? PostedDate { get; set; }
 
-    public string Owner { get; set; } = null!;
-
-    public string Status { get; set; } = null!;
-
-    public DateOnly PostedDate { get; set; }
-
-    public DateOnly? ClosingDate { get; set; }
-
-    public virtual AddDepartment Department { get; set; } = null!;
+    public string? CompanyLogo { get; set; }
 }

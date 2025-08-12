@@ -30,29 +30,29 @@ namespace RecruitmentSystem.Controllers
                 return View(model);
             }
 
-            if (_context.Users.Any(u => u.Email == model.Email))
+            if (!_context.Users.Any(u => u.Email == model.Email))
             {
-                ModelState.AddModelError("Email", "Account already exists with this Email");
-                return View(model);
+                bool isHrRegistered = _context.Users.Any(u => u.Role == "HR");
+                if (model.Role == "HR" && isHrRegistered)
+                {
+                    ModelState.AddModelError("Role", "HR role is already assigned. You cannot register as HR.");
+                    return View(model);
+                }
+
+                if (string.IsNullOrEmpty(model.Role))
+                {
+                    model.Role = "User";
+                }
+
+                _context.Users.Add(model);
+                _context.SaveChanges();
+
+                TempData["SuccessMessage"] = "Registration successful! Please login.";
+                return RedirectToAction("Login");
             }
 
-            bool isHrRegistered = _context.Users.Any(u => u.Role == "HR");
-            if (model.Role == "HR" && isHrRegistered)
-            {
-                ModelState.AddModelError("Role", "HR role is already assigned. You cannot register as HR.");
-                return View(model);
-            }
-
-            if (string.IsNullOrEmpty(model.Role))
-            {
-                model.Role = "User";
-            }
-
-            _context.Users.Add(model);
-            _context.SaveChanges();
-
-            TempData["SuccessMessage"] = "Registration successful! Please login.";
-            return RedirectToAction("Login");
+            ModelState.AddModelError("Email", "Account already exists with this Email");
+            return View(model);
         }
 
         // GET: /Account/Login
