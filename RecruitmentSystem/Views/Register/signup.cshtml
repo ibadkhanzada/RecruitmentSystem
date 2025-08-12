@@ -1,10 +1,9 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "signup";
     Layout = "~/Views/Shared/registerLayout.cshtml";
 }
 
-
+@model RecruitmentSystem.Models.LoginViewModel
 
 <div class="container">
     <div class="row mt-lg-n10 mt-md-n11 mt-n10 justify-content-center">
@@ -58,15 +57,16 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form role="form">
+                   <form asp-action="signup">
                         <div class="mb-3">
-                            <input type="text" class="form-control" placeholder="Name" aria-label="Name">
+                        <input type="email" class="form-control" placeholder="Email" aria-label="Email" asp-for="Email">
+                        </div>
+                     
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="Password" aria-label="Password" asp-for="Password">
                         </div>
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Email" aria-label="Email">
-                        </div>
-                        <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Password" aria-label="Password">
+                            <input type="hidden" class="form-control" id="floatingPassword" placeholder="Password" asp-for="Role" value="user">
                         </div>
                         <div class="form-check form-check-info text-start">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
@@ -78,6 +78,7 @@
                             <button type="button" class="btn bg-gradient-dark w-100 my-4 mb-2">Sign up</button>
                         </div>
                         <p class="text-sm mt-3 mb-0">Already have an account? <a href="javascript:;" class="text-dark font-weight-bolder">Sign in</a></p>
+                        <span>@ViewBag.Email</span>
                     </form>
                 </div>
             </div>

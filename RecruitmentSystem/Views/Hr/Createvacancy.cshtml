@@ -1,8 +1,9 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Createvacancy";
     Layout = "~/Views/Shared/_hrLayout.cshtml";
 }
+
+
 @model RecruitmentSystem.Models.Vacancy
 
 <div class="container-fluid py-4">
@@ -13,30 +14,30 @@
                 </div>
                 <div class="card-body">
                     <p class="text-uppercase text-sm">Job Information</p>
-                    <form asp-action="Createvacancy">
-                    <div class="row">
-                        @* =============================TITLE================================ *@
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Title</label>
-                                <input class="form-control" type="text" placeholder="Enter job title" required asp-for="JobTitle">
+                    <form asp-action="Createvacancy" enctype="multipart/form-data">
+                        <div class="row">
+                            @* =============================TITLE================================ *@
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Title</label>
+                                    <input class="form-control" type="text" placeholder="Enter job title" required asp-for="JobTitle">
+                                </div>
                             </div>
-                        </div>
-                          @* =============================DESCRIPTION================================ *@
-                       <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Description</label>
-                                <textarea class="form-control" type="text" placeholder="Enter job description" required asp-for="JobDescription"></textarea>
+                            @* =============================DESCRIPTION================================ *@
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Description</label>
+                                    <textarea class="form-control" type="text" placeholder="Enter job description" required asp-for="JobDescription"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        @* =============================CREATION DATE================================ *@
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Creation Date</label>
-                                <input class="form-control" type="date" placeholder="Enter job creation date" required asp-for="PostedDate">
+                            @* =============================CREATION DATE================================ *@
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Creation Date</label>
+                                    <input class="form-control" type="date" placeholder="Enter job creation date" required asp-for="PostedDate">
+                                </div>
                             </div>
-                        </div>
-                        @* =============================DEPARTMENT================================ *@
+                            @* =============================DEPARTMENT================================ *@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="example-text-input" class="form-control-label">Department</label>
@@ -46,71 +47,64 @@
                                 </div>
                             </div>
 
-                        @* =============================STATUS================================ *@
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Status</label>
-                                <input class="form-control" type="text" placeholder="Enter job status" required asp-for="Status">
+                            @* =============================STATUS================================ *@
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Status</label>
+                                    <input class="form-control" type="text" placeholder="Enter job status" required asp-for="Status">
+                                </div>
+                            </div>
+                            @* =============================NO.OF OPENING================================ *@
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">No.Of Opening</label>
+                                    <input class="form-control" type="number" placeholder="Enter job no.of opening" required asp-for="JobTitle">
+                                </div>
+                            </div>
+                            @* =============================OWNER================================ *@
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Owner</label>
+                                    <input class="form-control" type="text" placeholder="Enter job owner" required asp-for="Owner">
+                                </div>
+                            </div>
+                            @* =============================CLOSE DATE================================ *@
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-datetime-input" class="form-control-label">Close Date</label>
+                                    <input class="form-control" type="date" placeholder="Enter job close date" required asp-for="ClosingDate">
+                                </div>
+                            </div>
+                            @* =============================LIST OF HIRED================================ *@
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">List Of Hired</label>
+                                    <input class="form-control" type="text" placeholder="Enter job list of hired applicant" required asp-for="ListOfHired">
+                                </div>
                             </div>
                         </div>
-                        @* =============================NO.OF OPENING================================ *@
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">No.Of Opening</label>
-                                <input class="form-control" type="number" placeholder="Enter job no.of opening" required asp-for="JobTitle">
-                            </div>
-                        </div>
-                        @* =============================OWNER================================ *@
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Owner</label>
-                                <input class="form-control" type="text" placeholder="Enter job owner" required asp-for="Owner">
-                            </div>
-                        </div>
-                        @* =============================CLOSE DATE================================ *@
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="example-datetime-input" class="form-control-label">Close Date</label>
-                                <input class="form-control" type="date" placeholder="Enter job close date" required asp-for="ClosingDate">
-                            </div>
-                        </div>
-                        @* =============================LIST OF HIRED================================ *@
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">List Of Hired</label>
-                                <input class="form-control" type="text" placeholder="Enter job list of hired applicant" required asp-for="ListOfHired">
-                            </div>
-                        </div>
-                     
-                    </div>
-                    @* =============================CONTACT INFORMATION================================ *@
 
-                    <hr class="horizontal dark">
-                    <p class="text-uppercase text-sm">Location</p>
-                    <div class="row">
-                       
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">City</label>
-                                <input class="form-control" type="text" asp-for="City">
+                        @* =============================CONTACT INFORMATION================================ *@
+                        <hr class="horizontal dark">
+                        <p class="text-uppercase text-sm">Location</p>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">City</label>
+                                    <input class="form-control" type="text" asp-for="City">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="example-text-input" class="form-control-label">Country</label>
+                                    <input class="form-control" type="text" asp-for="Country">
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="example-text-input" class="form-control-label">Country</label>
-                                <input class="form-control" type="text" asp-for="Country">
-                            </div>
-                        </div>
-                       
-                    </div>
-
-                   <button class="btn btn-primary" type="submit" name="btn">Submit</button>
+                        <button class="btn btn-primary" type="submit" name="btn">ADD</button>
                     </form>
                 </div>
-               
             </div>
         </div>
-    
     </div>
-   
 </div>
