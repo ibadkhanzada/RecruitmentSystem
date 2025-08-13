@@ -69,14 +69,14 @@ namespace RecruitmentSystem.Controllers
             if (!ModelState.IsValid)
                 return View(model);
 
+            // Role condition hata di gayi
             var user = _context.Users.FirstOrDefault(u =>
                 u.Email == model.Email &&
-                u.Password == model.Password &&
-                u.Role == model.Role);
+                u.Password == model.Password);
 
             if (user == null)
             {
-                ModelState.AddModelError("", "Invalid Email, Password, or Role");
+                ModelState.AddModelError("", "Invalid Email or Password");
                 return View(model);
             }
 
