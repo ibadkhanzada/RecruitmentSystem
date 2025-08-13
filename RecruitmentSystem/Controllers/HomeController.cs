@@ -31,26 +31,34 @@ namespace RecruitmentSystem.Controllers
             return View();
         }
 
-        public IActionResult Vacancies(string search, string location, string[] types)
+        public IActionResult Vacancies(string search, string city, string country, string status)
         {
             var query = _context.Vacancies.AsQueryable();
 
-            // Search filter
+            // Search filter (JobTitle or JobDescription)
             if (!string.IsNullOrEmpty(search))
             {
-                query = query.Where(v => v.Title.Contains(search) || v.Description.Contains(search));
+                query = query.Where(v =>
+                    (v.JobTitle != null && v.JobTitle.Contains(search)) ||
+                    (v.JobDescription != null && v.JobDescription.Contains(search)));
             }
 
-            // Location filter
-            if (!string.IsNullOrEmpty(location))
+            // City filter
+            if (!string.IsNullOrEmpty(city))
             {
-                query = query.Where(v => v.Location.Contains(location));
+                query = query.Where(v => v.City != null && v.City.Contains(city));
             }
 
-            // Employment type filter
-            if (types != null && types.Length > 0)
+            // Country filter
+            if (!string.IsNullOrEmpty(country))
             {
-                query = query.Where(v => types.Contains(v.EmploymentType));
+                query = query.Where(v => v.Country != null && v.Country.Contains(country));
+            }
+
+            // Status filter
+            if (!string.IsNullOrEmpty(status))
+            {
+                query = query.Where(v => v.Status != null && v.Status.Contains(status));
             }
 
             var vacancies = query.ToList();

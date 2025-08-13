@@ -94,14 +94,18 @@ namespace RecruitmentSystem.Controllers
                 return NotFound();
             }
 
-            existing.Title = vac.Title;
-            existing.Description = vac.Description;
-            existing.Location = vac.Location;
-            existing.EmploymentType = vac.EmploymentType;
-            existing.Salary = vac.Salary;
+            // Updated properties to match new model
+            existing.JobTitle = vac.JobTitle;
+            existing.JobDescription = vac.JobDescription;
             existing.PostedDate = vac.PostedDate;
+            existing.DepartmentId = vac.DepartmentId;
+            existing.Status = vac.Status;
+            existing.NoOfOpening = vac.NoOfOpening;
+            existing.Owner = vac.Owner;
             existing.ClosingDate = vac.ClosingDate;
-            existing.CompanyLogo = vac.CompanyLogo;
+            existing.ListOfHired = vac.ListOfHired;
+            existing.City = vac.City;
+            existing.Country = vac.Country;
 
             _context.Vacancies.Update(existing);
             _context.SaveChanges();
